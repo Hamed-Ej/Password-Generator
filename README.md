@@ -1,56 +1,113 @@
-# Password Generator Dashboard
+# Password Generator
 
-## Project Overview
-The 'Password Generator Dashboard' is an interactive web application built with Python and Streamlit. It allows users to generate different types of passwords quickly, either randomly, as a memorable sequence of words, or as a pin code, based on their preferences.
+A flexible and user-friendly password generator with multiple generation modes, built with Python and Streamlit.
 
-## Project Structure
-The project has the following structure:
+## Features
 
-- `password_generators.py`: A Python module containing the password generators classes; `RandomPasswordGenerator`, `MemorablePasswordGenerator`, and `PinCodeGenerator`.
-- `app.py`: A Python script using Streamlit to create a web app interface for the password generators.
-- `README.md`: Documentation for the project solution. You are currently reading this!
+- **Random Password Generation**: Create secure passwords with customizable length and character types
+- **Memorable Password Generation**: Generate easy-to-remember passphrases using real words
+- **PIN Code Generation**: Create numeric PIN codes of any length
+- **Interactive Web Interface**: Built with Streamlit for a smooth user experience
 
-## Getting Started
+## Installation
 
-Follow the instructions below to set up this project on your local machine.
-
-### Prerequisites
-
-- Python 3.6 or later
-- Streamlit
-- NLTK (Natural Language Toolkit)
-
-To install NLTK, use pip:
-
+1. Clone the repository:
 ```bash
-pip install nltk
+git clone https://github.com/yourusername/password-generator.git
+cd password-generator
 ```
 
-After installing NLTK, you need to download the 'words' corpus. Run Python and type these commands:
+2. Install required dependencies:
+```bash
+pip install streamlit nltk
+```
 
+3. Download NLTK words corpus (required for memorable passwords):
 ```python
-import nltk
-nltk.download('words')
-```
-
-Then install Streamlit using pip:
-
-```bash
-pip install streamlit
-```
-
-You can install all the required dependencies using the `requirements.txt` file:
-
-```bash
-pip install -r requirements.txt
+python -c "import nltk; nltk.download('words')"
 ```
 
 ## Usage
 
-After following the installation steps, you can run the Streamlit web app as follows:
+### Web Interface
 
-```sh
-streamlit run app.py
+Launch the Streamlit app:
+```bash
+streamlit run run.py
 ```
 
-This will open a web page in your default browser running on your localhost.
+Then open your browser to the provided local URL (typically `http://localhost:8501`).
+
+### Command Line
+
+You can also use the password generation functions directly in your Python code:
+
+```python
+from password_generator import generate_random_password, generate_memorable_password, generate_pin
+
+# Generate a random password
+password = generate_random_password(length=12, include_numbers=True, include_symbols=True)
+
+# Generate a memorable password
+memorable = generate_memorable_password(no_of_words=4, separator="-", capitalization=True)
+
+# Generate a PIN
+pin = generate_pin(length=6)
+```
+
+## Password Types
+
+### Random Password
+- Customizable length (5-50 characters)
+- Optional numbers inclusion
+- Optional symbols inclusion
+- Uses uppercase and lowercase letters
+
+### Memorable Password
+- Customizable word count (5-50 words)
+- Choose separator (-, ., or space)
+- Optional capitalization
+- Uses real English words from NLTK corpus
+
+### PIN Code
+- Customizable length (5-50 digits)
+- Numeric only
+
+## Project Structure
+
+```
+password-generator/
+│
+├── password_generator.py    # Core password generation logic
+├── run.py                   # Streamlit web interface
+├── images/
+│   └── banner.jpeg         # App banner image
+└── README.md
+```
+
+## Requirements
+
+- Python 3.7+
+- streamlit
+- nltk
+
+## Testing
+
+Run the built-in tests:
+```bash
+python password_generator.py
+```
+
+This will execute test cases for all three password generation modes.
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is open source and available under the MIT License.
+
+## Security Note
+
+This tool generates passwords using Python's `random` module, which is suitable for general password generation. For cryptographically secure applications, consider using the `secrets` module instead.
